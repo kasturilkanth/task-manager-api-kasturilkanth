@@ -1,14 +1,23 @@
 const  express = require("express");
 const router = express.Router();
-// const tasks=require("../task.json")
+let tasks=require("../task.json")
+tasks=tasks.taskData;
+// console.log(tasks)
 
-router.get("/",(req,res)=>{
+router.get("/all",(req,res)=>{
     res.status(200).json(tasks)
 });
+// router.get('', getHello);
+// async function getHello() {    return "Hello"; }
+
+
 
 router.get("/:id",(req,res)=>{
     const id=req.params.id;
+    console.log(id)
+    console.log("this is the task",tasks)
     const task=tasks.find(task=>task.id===parseInt(id));
+   
     if(!task){
         res.status(404).json({message:"Task not found"})
     }   
